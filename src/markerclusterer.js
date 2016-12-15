@@ -1202,6 +1202,8 @@ ClusterIcon.prototype.useStyle = function() {
   this.textColor_ = style['textColor'];
   this.anchor_ = style['anchor'];
   this.textSize_ = style['textSize'];
+  this.fontWeight_ = style['fontWeight'];
+  this.fontFamily_ = style['fontFamily'];
   this.backgroundPosition_ = style['backgroundPosition'];
   this.iconAnchor_ = style['iconAnchor'];
 };
@@ -1228,6 +1230,7 @@ ClusterIcon.prototype.createCss = function(pos) {
   style.push('background-image:url(' + this.url_ + ');');
   var backgroundPosition = this.backgroundPosition_ ? this.backgroundPosition_ : '0 0';
   style.push('background-position:' + backgroundPosition + ';');
+  style.push('background-size:' + this.height_ + 'px, ' + this.width_ + 'px;');
 
   if (typeof this.anchor_ === 'object') {
     if (typeof this.anchor_[0] === 'number' && this.anchor_[0] > 0 &&
@@ -1256,10 +1259,16 @@ ClusterIcon.prototype.createCss = function(pos) {
 
   var txtColor = this.textColor_ ? this.textColor_ : 'black';
   var txtSize = this.textSize_ ? this.textSize_ : 11;
+  var fontFamily = this.fontFamily_ ? this.fontFamily_ : 'Arial,sans-serif';
+  var fontWeight = this.fontWeight_ ? this.fontWeight_ : 'bold';
 
   style.push('cursor:pointer; top:' + pos.y + 'px; left:' +
       pos.x + 'px; color:' + txtColor + '; position:absolute; font-size:' +
-      txtSize + 'px; font-family:Arial,sans-serif; font-weight:bold');
+      txtSize + 'px;');
+
+  style.push('font-family:' + fontFamily + ';');
+  style.push('font-weight:' + fontWeight + ';');
+
   return style.join('');
 };
 
